@@ -16,19 +16,28 @@ Array.prototype.myMethod = function(param1, param2) {
 /*
  * Calls function fn for each element of array
  * */
-function each(fn) {
+function each(fn, contextObj) {
+    //this.map(fn);
+    for (var i = 0; i < this.length; i++) {
+        fn.call(arguments.length === 1 ? this : contextObj, this[i]);
+    }
 }
+
+Array.prototype.each = each;
 
 function eachExampleUsages() {
   var names = ["bob", "ed", "kate"];
   names.each(function(name) {
     console.log("Hi " + name);
+    console.log("This: " + this);
   });// => logs on console: "Hi Bob", "Hi Kate", "Hi Ed"
 
+  var bob = {name:'Bob'};
   var ints = [1, 2, 3, 4];
   ints.each(function(i) {
     console.log(i);
-  }); // => logs on console: 1, 2, 3, 4
+    console.log("This: " + this);
+  }, bob); // => logs on console: 1, 2, 3, 4
 }
 //eachExampleUsages();
 
@@ -57,7 +66,16 @@ function mapExampleUsage() {
  * containing only filtered elements
  * */
 function filter(fn) {
+    var r = [];
+    for (var i = 0; i < this.length; i++) {
+        if (fn(this[i])) {
+            r.push(this[i]);
+        }
+    }
+    return r;
 }
+
+Array.prototype.filter = filter;
 
 function filterExampleUsage() {
   var odds = [1, 2, 3, 4].filter(function(i) {
@@ -84,7 +102,15 @@ function filterExampleUsage() {
  * }) => true
  * */
 function all(fn) {
+    for (var i = 0; i < this.length; i++) {
+        if (!fn(this[i])) {
+            return false;
+        }
+    }
+    return true;
 }
+
+Array.prototype.all = all;
 
 /* shuffle() usage:
  * [1, 2, 3, 4].shuffle() => [2, 4, 1, 3]

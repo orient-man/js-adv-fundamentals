@@ -6,6 +6,12 @@ for (var i = 0; i < 10; i++) {
  * reverse("abc") => "cba"
  * */
 function reverse(string) {
+    var result = "";
+    // string.split("").reverse().join("")
+    for (var i = 0; i < string.length; i++) {
+        result = string[i] + result;
+    }
+    return result;
 }
 
 /*
@@ -13,8 +19,7 @@ function reverse(string) {
  * reverse("abc xyz") => "cba zyx"
  * */
 function reverseEachWord(string) {
-  //var arr = string.split("|")
-  //arr.join("#")
+    return string.split(" ").map(reverse).join(" ");
 }
 
 /*
@@ -22,6 +27,10 @@ function reverseEachWord(string) {
  * titleize("alice in wonderland") # => "Alice In Wonderland"
  * */
 function titleize(string) {
+    return string
+        .split(" ")
+        .map(function (s) { return s[0].toUpperCase() + s.slice(1); })
+        .join(" ");
 }
 
 /*

@@ -15,14 +15,22 @@ function isEmpty() {
  * [1,2,3].include(3) => true
  * [1,2,3].include(99) => false
  * */
-function include(obj) {
-}
+Array.prototype.include = function (obj) {
+    return this.indexOf(obj) >= 0;
+};
 
 /* uniq() usage:
  * [1,2,3,1,1,2,1].uniq() => [1, 2, 3]
  * */
-function uniq() {
-}
+Array.prototype.uniq = function() {
+    return this
+        .reduce(function (result, v) {
+            if (result.indexOf(v) < 0) {
+                result.push(v);
+            }
+            return result;
+        }, []);
+};
 
 // arr.splice(index, deleteCount, objToInsert1, objToInsert2, ...);
 /*
@@ -30,8 +38,10 @@ function uniq() {
  * ["a", "b", "c"].insertAt(1, "xxx") => ["a", "xxx", "b", "c"]
  * */
 function insertAt(index, object) {
+    this.splice(index, 0, object);
 }
 
+Array.prototype.insertAt = insertAt;
 /*
  * deleteAt(index) usage:
  * var arr = ["a", "b", "c"];
@@ -41,6 +51,7 @@ function insertAt(index, object) {
 function deleteAt(index) {
 }
 
+Array.prototype.deleteAt = deleteAt;
 /* shuffle() usage:
  * [1, 2, 3, 4].shuffle() => [2, 4, 1, 3]
  *

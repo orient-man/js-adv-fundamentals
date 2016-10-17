@@ -1,11 +1,46 @@
+var MBank = {}
+MBank.Models = {}
+
+MBank.Models.Range = (function () {
+    var Range = function (start, end) {
+        this.start = start;
+        this.end = end;
+    }
+
+    Range.prototype = {
+        length: function () { return this.end - this.start; },
+
+        include: function (number) {
+            return number >= this.start && number < this.end;
+        }
+    }
+
+    return Range;
+})();
+
+var mm = MBank.Models;
+
+var sqrt = (function() {
+    var cache = {};
+    return function (x) {
+        if (cache[x] === undefined) {
+            cache[x] = x * x;
+        }
+        else {
+            console.log('from cache');
+        }
+        return cache[x];
+    }
+})();
+
 function rangeExampleUsage() {
   // Konstruktor przyjmuje dwa parametry: start i end, definiujące poczatek i koniec obustronnie domknietego przedziału <start, end>
   /*
    * Range represents a [start..end) range
    * Constructor takes two params: start, end
    * */
-  var range = new Range(10, 99);
-  var otherRange = new Range(-10, 20);
+  var range = new mm.Range(10, 99);
+  var otherRange = new mm.Range(-10, 20);
 
   /* include(number) returns true if number ranges from start to end */
   console.log("include 21", range.include(21)); // => true

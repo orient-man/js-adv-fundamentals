@@ -5,6 +5,8 @@
  * callInContext(myFunction, myObject, 1, "xxx", [])
  * */
 function callInContext(fn, contextObj) {
+    var args = Array.prototype.slice.call(arguments, 2);
+    return fn.apply(contextObj, args);
 }
 
 function callInContextExampleUsage() {
@@ -37,7 +39,10 @@ function log() {
  * Each time binded function is called, its called in context of contextObj
  * */
 function bind(contextObj, fn) {
-
+    return function () {
+        var args = Array.prototype.slice.call(arguments);
+        return fn.apply(contextObj, args);
+    }
 }
 
 function bindTest() {

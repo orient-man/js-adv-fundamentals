@@ -3,10 +3,9 @@
  * odd(20) => false
  * odd(7) => true
  * */
-function odd(number) { // true/false
-  return 1;
+function isOdd(number) { // true/false
+  return (number % 2 === 1);
 }
-
 
 /*
  * Init var currentValue with 2;
@@ -15,27 +14,32 @@ function odd(number) { // true/false
  * - log it on console
  * */
 function toInfinity() {
+    var i, currentValue = 2;
+    for (i = 0; i < 10; i++) {
+        console.log(currentValue * currentValue);
+    }
 }
 
 /*
  * Returns pseudo random number between [0, max)
  * */
 function random(max) {
-//  Math.random();
+    return Math.random() * max;
 }
 
 /*
  * Returns pseudo random number between [min, max)
  * */
 function randomBetween(min, max) {
-
+    return min + random(max - min);
 }
 
 function even(number) { // true/false
+    return !isOdd(number);
 }
 
 function div(dividend, divisor) { // dzielenie div np. (13, 4) === 3
-
+    return Math.floor(dividend / divisor);
 }
 
 function divmod(divident, divisor) { // [dzielenie div, dzielenie mod] np. (13, 4) === [3, 1]; ()

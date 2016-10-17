@@ -11,8 +11,16 @@ for (var propertyName in obj) {
  * {name: "Bob", age: 22}.keys() => ['name', 'age']
  * */
 function keys() {
+    var result = [];
+    for (var p in this) {
+        if (this.hasOwnProperty(p)) {
+            result.push(p);
+        }
+    }
+    return result;
 }
 
+Object.prototype.keys = keys;
 /*
  * Usage:
  * {name: "Bob", age: 22}.values() => ["Bob", 22]
